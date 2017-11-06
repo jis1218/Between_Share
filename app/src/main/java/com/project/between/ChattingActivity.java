@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -79,6 +80,7 @@ public class ChattingActivity extends AppCompatActivity {
                     list.add(message);
                 }
                 adapter.refreshData(list);
+                recyclerViewChatting.scrollToPosition(list.size()-1); //chat이 추가될 때마다 RecyclerView의 스크롤을 밑으로 내려줌
             }
 
             @Override
@@ -98,11 +100,15 @@ public class ChattingActivity extends AppCompatActivity {
         editTextPutMessage.setText("");
         String time = String.valueOf(System.currentTimeMillis());
         roomRef.child(time).setValue(message);
+
     }
 
     private void setRecyclerListener() {
         adapter = new RecyclerAdapter();
         recyclerViewChatting.setAdapter(adapter);
-        recyclerViewChatting.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearManager = new LinearLayoutManager(this);
+        linearManager.setStackFromEnd(true); //가장 최신 메시지부터 보여줌
+        recyclerViewChatting.setLayoutManager(linearManager);
     }
+
 }
