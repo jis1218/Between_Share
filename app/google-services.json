@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "321538570740",
+    "firebase_url": "https://between-c6ecb.firebaseio.com",
+    "project_id": "between-c6ecb",
+    "storage_bucket": "between-c6ecb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321538570740:android:67d2aa1919f7705d",
+        "android_client_info": {
+          "package_name": "com.project.between"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321538570740-o08fbu8a3fd1j59bhuphtoibiqd822pk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.between",
+            "certificate_hash": "d00471126de4fcccc7e138e79cd895dbe1a32b05"
+          }
+        },
+        {
+          "client_id": "321538570740-2mhtcfd2ur96agica1smtn3kfdmfdfft.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMbN1nVoR5wtQKYloDSPtM0a8F4CdwlG4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "321538570740-2mhtcfd2ur96agica1smtn3kfdmfdfft.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
