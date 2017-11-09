@@ -28,6 +28,11 @@
         <activity android:name=".signInAndUp.PhoneConnectActivity"/>
         <activity android:name=".signInAndUp.ProfileActivity"/>
         <activity android:name=".signInAndUp.SignIn2Activity"/>
+        <activity android:name=".AnniversaryAndCalendar.HomeActivity" />
+        <activity android:name=".AnniversaryAndCalendar.AnniversaryListActivity"/>
+        <activity android:name=".AnniversaryAndCalendar.AnniversarySettingActivity" />
+        <activity android:name=".AnniversaryAndCalendar.CalendarWriteActivity" />
+        <activity android:name=".AnniversaryAndCalendar.CalendarViewActivity" />
 
     </application>
 
