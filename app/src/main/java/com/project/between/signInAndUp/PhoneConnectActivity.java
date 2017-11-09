@@ -19,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.project.between.R;
 
+import org.w3c.dom.Text;
+
 public class PhoneConnectActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
@@ -132,11 +134,11 @@ public class PhoneConnectActivity extends AppCompatActivity {
 
 
     private void initView() {
-        myNum_edit = findViewById(R.id.myNum_edit);
-        friendNum_edit = findViewById(R.id.friendNum_edit);
-        phone_Connect_btn = findViewById(R.id.phone_Connect_btn);
-        phoneNum_img_btn = findViewById(R.id.phoneNum_img_btn);
-        friendPhone_text = findViewById(R.id.friendPhone_text);
+        myNum_edit = (EditText) findViewById(R.id.myNum_edit);
+        friendNum_edit = (EditText) findViewById(R.id.friendNum_edit);
+        phone_Connect_btn = (Button) findViewById(R.id.phone_Connect_btn);
+        phoneNum_img_btn = (ImageButton) findViewById(R.id.phoneNum_img_btn);
+        friendPhone_text = (TextView) findViewById(R.id.friendPhone_text);
     }
 
     public void loadPhoneNumberLocalDatabase() {

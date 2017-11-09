@@ -16,8 +16,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.project.between.AnniversaryActivity;
 import com.project.between.R;
+import com.project.between.chatting.ChattingActivity;
 
 public class SignIn2Activity extends AppCompatActivity {
 
@@ -44,9 +44,9 @@ public class SignIn2Activity extends AppCompatActivity {
     }
 
     public void initview() {
-        signUp_email_edit = findViewById(R.id.signUp_email_edit);
-        signUp_password_edit = findViewById(R.id.signUp_password_edit);
-        login_btn = findViewById(R.id.login_btn);
+        signUp_email_edit = (EditText) findViewById(R.id.signUp_email_edit);
+        signUp_password_edit = (EditText) findViewById(R.id.signUp_password_edit);
+        login_btn = (Button) findViewById(R.id.login_btn);
 
     }
 
@@ -64,7 +64,7 @@ public class SignIn2Activity extends AppCompatActivity {
                             // 이메일 검증 확인
                             if (user.isEmailVerified()) {
                                 // 다음 페이지로 이동
-                                Intent intent = new Intent(SignIn2Activity.this, AnniversaryActivity.class);
+                                Intent intent = new Intent(SignIn2Activity.this, ChattingActivity.class);
                                 startActivity(intent);
                                 finish();
                             } else {

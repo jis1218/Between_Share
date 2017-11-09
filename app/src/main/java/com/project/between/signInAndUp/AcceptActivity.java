@@ -13,7 +13,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.project.between.AnniversaryActivity;
 import com.project.between.R;
 
 public class AcceptActivity extends AppCompatActivity {
@@ -99,9 +98,9 @@ public class AcceptActivity extends AppCompatActivity {
 
     private void initView() {
 
-        download_btn = findViewById(R.id.download_btn);
-        myNum_edit = findViewById(R.id.myNum_edit);
-        friendNum_edit = findViewById(R.id.friendNum_edit);
+        download_btn = (Button) findViewById(R.id.download_btn);
+        myNum_edit = (EditText) findViewById(R.id.myNum_edit);
+        friendNum_edit = (EditText) findViewById(R.id.friendNum_edit);
 
     }
 }

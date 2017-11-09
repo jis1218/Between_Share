@@ -22,8 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.project.between.R;
-import com.project.between.verificationUtil_js.DialogUtil;
-import com.project.between.verificationUtil_js.VerificationUtil;
+import com.project.between.util.DialogUtil;
+import com.project.between.util.VerificationUtil;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -114,7 +114,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        signUp_email_edit = findViewById(R.id.signUp_email_edit);
+        signUp_email_edit = (EditText) findViewById(R.id.signUp_email_edit);
         signUp_email_edit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -132,7 +132,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
-        signUp_password_edit = findViewById(R.id.signUp_password_edit);
+        signUp_password_edit = (EditText) findViewById(R.id.signUp_password_edit);
         signUp_password_edit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -150,7 +150,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
-        signUp_btn = findViewById(R.id.signUp_btn);
+        signUp_btn = (Button) findViewById(R.id.signUp_btn);
     }
 }
 
