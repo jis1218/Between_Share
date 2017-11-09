@@ -6,8 +6,9 @@ package com.project.between.domain;
 
 public class MyMessage {
     public String message;
-    public String phone_number;
+    public String user_id;
     public String messageTime;
+    public String messageDate;
 
     public MyMessage() {
     }

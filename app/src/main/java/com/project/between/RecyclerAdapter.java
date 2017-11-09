@@ -1,5 +1,6 @@
 package com.project.between;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.project.between.domain.MyMessage;
+import com.project.between.domain.User;
+import com.project.between.util.PreferenceUtil;
 
 import java.util.ArrayList;
 
@@ -16,10 +19,13 @@ import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyAdapter> {
     ArrayList<MyMessage> list = new ArrayList<>();
-    final static String MY_NUM = "010010010";
     final static int MY_MESSAGE = 0;
     final static int YOUR_MESSAGE = 1;
+    Context context;
 
+    public RecyclerAdapter(Context context) {
+        this.context = context;
+    }
 
     public void refreshData(ArrayList<MyMessage> list) {
         this.list = list;
@@ -29,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyAdap
     @Override
     public int getItemViewType(int position) {
 
-        if (MY_NUM.equals(list.get(position).phone_number)) {
+        if ((list.get(position).user_id).equals(PreferenceUtil.getStringValue(context,"user_id"))) {
             return MY_MESSAGE;
         } else {
             return YOUR_MESSAGE;
@@ -54,6 +60,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyAdap
     public void onBindViewHolder(MyAdapter holder, int position) {
         holder.textViewMyChat.setText(list.get(position).message);
         holder.textViewTime.setText(list.get(position).messageTime);
+        holder.textViewDivideLine.setText("------------------------ " + list.get(position).messageDate + "-----------------------");
+        if(position>=1 && list.get(position).messageDate.equals(list.get(position-1).messageDate)){
+            holder.textViewDivideLine.setVisibility(View.GONE);
+        }else{
+            holder.textViewDivideLine.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -64,12 +76,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyAdap
     class MyAdapter extends RecyclerView.ViewHolder {
         TextView textViewMyChat;
         TextView textViewTime;
+        TextView textViewDivideLine;
 
         public MyAdapter(View itemView) {
             super(itemView);
 
             textViewMyChat = itemView.findViewById(R.id.textViewMyChat);
             textViewTime = itemView.findViewById(R.id.textViewTime);
+            textViewDivideLine = itemView.findViewById(R.id.textViewDivideLine);
         }
     }
 }

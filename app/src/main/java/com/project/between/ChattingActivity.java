@@ -8,17 +8,20 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.project.between.Util.TimeConverter;
+import com.project.between.domain.User;
+import com.project.between.util.PreferenceUtil;
+import com.project.between.util.TimeConverter;
 import com.project.between.domain.MyMessage;
 
 import java.util.ArrayList;
@@ -28,11 +31,13 @@ public class ChattingActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference userRef;
     DatabaseReference roomRef;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
+
     Toolbar toolbarChattingActivity;
     RecyclerView recyclerViewChatting;
     EditText editTextPutMessage;
     Button buttonSendMessage;
-    String roomkey;
     RecyclerAdapter adapter;
     MyMessage message;
 
@@ -42,7 +47,6 @@ public class ChattingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chatting);
         initView();
         setInstanceOfDatabase();
-        //setDatabase();
         setRecyclerListener();
         getMessageFromDatabase();
         setSupportActionBar(toolbarChattingActivity);
@@ -66,8 +70,10 @@ public class ChattingActivity extends AppCompatActivity {
         userRef = database.getReference("user");
         roomRef = database.getReference("room").child("happy");
         message = new MyMessage();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        Log.d("user_id", user.getUid());
     }
-
 
     private void getMessageFromDatabase() {
         roomRef.addValueEventListener(new ValueEventListener() {
@@ -76,7 +82,6 @@ public class ChattingActivity extends AppCompatActivity {
                 ArrayList<MyMessage> list = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     MyMessage message = snapshot.getValue(MyMessage.class);
-                    //Log.d("======", "what?" + chat);
                     list.add(message);
                 }
                 adapter.refreshData(list);
@@ -95,8 +100,9 @@ public class ChattingActivity extends AppCompatActivity {
     public void sendMessage(View view) {
         Toast.makeText(this, "하하하", Toast.LENGTH_SHORT).show();
         message.message = editTextPutMessage.getText().toString();
-        message.phone_number = "010010010";
-        message.messageTime = TimeConverter.timeConverter(System.currentTimeMillis());
+        message.user_id = PreferenceUtil.getStringValue(this, "user_id");
+        message.messageTime = TimeConverter.timeConverterMinute(System.currentTimeMillis());
+        message.messageDate = TimeConverter.timeConverterDate(System.currentTimeMillis());
         editTextPutMessage.setText("");
         String time = String.valueOf(System.currentTimeMillis());
         roomRef.child(time).setValue(message);
@@ -104,7 +110,7 @@ public class ChattingActivity extends AppCompatActivity {
     }
 
     private void setRecyclerListener() {
-        adapter = new RecyclerAdapter();
+        adapter = new RecyclerAdapter(this);
         recyclerViewChatting.setAdapter(adapter);
         LinearLayoutManager linearManager = new LinearLayoutManager(this);
         linearManager.setStackFromEnd(true); //가장 최신 메시지부터 보여줌

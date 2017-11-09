@@ -1,35 +1,27 @@
 package com.project.between.domain;
 
-import java.util.ArrayList;
-
 /**
- * Created by 정인섭 on 2017-11-06.
+ * Created by 정인섭 on 2017-11-03.
  */
 
 public class User {
-    String name;
-    String email;
-    String password;
-    String phone_number;
-    String profile_picture;
-    String token;
-    String notification;
-    String birthday;
-    String join_date;
+    public String fId;
+    public String mName;
+    public String email;
+    public String token;
+    public String phone_num;
+    public String mId;
 
-    public User() {
+
+    public User(){
+        // default for firebase
     }
 
-    public User(String name, String email, String password, String phone_number, String profile_picture,
-                String token, String notification, String birthday, String join_date) {
-        this.name = name;
+    public User(String fId, String mName, String email, String phone_num, String mId) {
+        this.fId = fId;
+        this.mName = mName;
         this.email = email;
-        this.password = password;
-        this.phone_number = phone_number;
-        this.profile_picture = profile_picture;
-        this.token = token;
-        this.notification = notification;
-        this.birthday = birthday;
-        this.join_date = join_date;
+        this.phone_num = phone_num;
+        this.mId = mId;
     }
 }

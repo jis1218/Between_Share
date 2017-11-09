@@ -4,25 +4,37 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/textViewDivideLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="날짜가 옴"
+        android:textSize="10sp" />
+
+    <TextView
         android:id="@+id/textViewMyChat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:background="@android:color/holo_blue_bright"
-        android:padding="4dp"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_below="@+id/textViewDivideLine"
+        android:layout_margin="4dp"
+        android:background="@android:color/holo_orange_light"
+        android:maxWidth="250dp"
+        android:padding="10dp"
+        android:singleLine="false"
         android:text="TextView"
-        android:textSize="18sp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textViewTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textViewMyChat"
-        android:layout_toEndOf="@+id/textViewMyChat"
         android:layout_toRightOf="@+id/textViewMyChat"
-        android:text="TextView" />
-
+        android:layout_toEndOf="@+id/textViewMyChat" />
 </RelativeLayout>
