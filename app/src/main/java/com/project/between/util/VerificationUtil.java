@@ -17,6 +17,7 @@ public class VerificationUtil {
         return m.matches();
     }
 
+
     public static boolean isValidPassword(String password) {
         // 영문자와 숫자만 허용
         String regex = "^[0-9A-Za-z]{8,14}$";
