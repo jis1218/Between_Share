@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.project.between.R;
+import com.project.between.AnniversaryAndCalendar.HomeActivity;
 import com.project.between.chatting.ChattingActivity;
 
 import org.w3c.dom.Text;
@@ -80,8 +80,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void movetohome(View view) {
         addDatabase();
-        Intent intent = new Intent(ProfileActivity.this, ChattingActivity.class);
-        startActivity(intent);
+        Intent intentForHome = new Intent(ProfileActivity.this, HomeActivity.class);
+        startActivity(intentForHome);
+        Intent intentForChat = new Intent(ProfileActivity.this, ChattingActivity.class);
+        intentForChat.putExtra("tempkey", tempkey);
+        startActivity(intentForChat);
 
     }
 

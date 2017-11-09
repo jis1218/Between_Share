@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.project.between.R;
+import com.project.between.AnniversaryAndCalendar.HomeActivity;
 import com.project.between.chatting.ChattingActivity;
 
 public class SignIn2Activity extends AppCompatActivity {
@@ -62,16 +62,20 @@ public class SignIn2Activity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             // 이메일 검증 확인
-                            if (user.isEmailVerified()) {
-                                // 다음 페이지로 이동
-                                Intent intent = new Intent(SignIn2Activity.this, ChattingActivity.class);
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                Toast.makeText(SignIn2Activity.this
-                                        , "이메일을 확인하셔야 합니다"
-                                        , Toast.LENGTH_SHORT).show();
-                            }
+//                            if (user.isEmailVerified()) {
+//                                // 다음 페이지로 이동
+//                                Intent intent = new Intent(SignIn2Activity.this, HomeActivity.class);
+//                                startActivity(intent);
+//                                finish();
+//                            } else {
+//                                Toast.makeText(SignIn2Activity.this
+//                                        , "이메일을 확인하셔야 합니다"
+//                                        , Toast.LENGTH_SHORT).show();
+//                            }
+
+                            Intent intent = new Intent(SignIn2Activity.this, HomeActivity.class);
+                            startActivity(intent);
+                            finish();
                         } else {
                             Toast.makeText(SignIn2Activity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();

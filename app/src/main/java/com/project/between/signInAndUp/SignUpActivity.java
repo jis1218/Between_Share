@@ -21,8 +21,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.project.between.R;
 import com.project.between.util.DialogUtil;
+import com.project.between.util.PreferenceUtil;
 import com.project.between.util.VerificationUtil;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -70,6 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             DialogUtil.showDialog("이메일을 발송하였습니다.", SignUpActivity.this, true);
                                             moveToNext();
+                                            //PreferenceUtil.setValue("userEmail", email);
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override

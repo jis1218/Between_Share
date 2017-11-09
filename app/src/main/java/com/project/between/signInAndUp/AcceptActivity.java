@@ -7,13 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.project.between.R;
 
 public class AcceptActivity extends AppCompatActivity {
 
@@ -23,10 +23,11 @@ public class AcceptActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference userRef;
-    DatabaseReference tempRoomRef;
+    DatabaseReference myNumRef;
 
     String myNumber;
     String friendNumber;
+    String tempkey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +35,16 @@ public class AcceptActivity extends AppCompatActivity {
         setContentView(R.layout.activity_accept);
         Intent intent = getIntent();
         myNumber = intent.getStringExtra("myNumber");
+        tempkey = intent.getStringExtra("tempkey2");
+
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("user");
         /*수정
         tempRoomRef = database.getReference("temp").child(myNumber).child("status");
         */
-        tempRoomRef = database.getReference("temp");
+        myNumRef = database.getReference("temp").child(myNumber).child("status");
+        Toast.makeText(this, myNumber, Toast.LENGTH_SHORT).show();
+
 
         initView();
 
@@ -54,24 +59,34 @@ public class AcceptActivity extends AppCompatActivity {
 
     public void goToProfileActivity(){
 
-        tempRoomRef.addValueEventListener(new ValueEventListener() {
+        myNumRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                 /*수정
 
-                     if(snapshot.getValue().equals(myNumber)){
-                         Intent intent = new Intent(AcceptActivity.this, ProfileActivity.class);
-                         startActivity(intent);
-                     }
-                 */
-                    if(snapshot.hasChild("check")) {
-                        if(snapshot.child("check").getValue().equals(myNumber)){
-                            Intent intent = new Intent(AcceptActivity.this, ProfileActivity.class);
-                            intent.putExtra("tempkey2",myNumber);
+//                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+//                 /*수정
+//
+//                     if(snapshot.getValue().equals(myNumber)){
+//                         Intent intent = new Intent(AcceptActivity.this, ProfileActivity.class);
+//                         startActivity(intent);
+//                     }
+//                 */
+//                    if(snapshot.hasChild("check")) {
+//                        if(snapshot.child("check").getValue().equals(myNumber)){
+//                            Intent intent = new Intent(AcceptActivity.this, ProfileActivity.class);
+//                            intent.putExtra("tempkey2",myNumber);
+//                            startActivity(intent);
+//                        }
+//                    }
+//
+//                }
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    if("yes".equals(snapshot.getValue(String.class))){
+                        Intent intent = new Intent(AcceptActivity.this, ProfileActivity.class);
+                            intent.putExtra("tempkey2",tempkey);
                             startActivity(intent);
-                        }
                     }
+                    Toast.makeText(AcceptActivity.this, snapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -81,6 +96,10 @@ public class AcceptActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
+
+
+
         });
 
     }

@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.project.between.R;
 
 public class AnniversarySettingActivity extends AppCompatActivity {
 

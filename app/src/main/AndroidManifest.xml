@@ -10,9 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/NoActionBar">
         <activity android:name=".chatting.ChattingActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden">
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
 
-        </activity>
         <activity android:name=".signInAndUp.SignInActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -21,13 +20,16 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-        <activity android:name=".signInAndUp.SignUpActivity">
-
-        </activity>
+        <activity android:name=".signInAndUp.SignUpActivity"/>
         <activity android:name=".signInAndUp.AcceptActivity"/>
         <activity android:name=".signInAndUp.PhoneConnectActivity"/>
         <activity android:name=".signInAndUp.ProfileActivity"/>
         <activity android:name=".signInAndUp.SignIn2Activity"/>
+        <activity android:name=".AnniversaryAndCalendar.HomeActivity"/>
+        <activity android:name=".AnniversaryAndCalendar.AnniversaryListActivity"/>
+        <activity android:name=".AnniversaryAndCalendar.AnniversarySettingActivity"/>
+        <activity android:name=".AnniversaryAndCalendar.CalendarViewActivity"/>
+        <activity android:name=".AnniversaryAndCalendar.CalendarWriteActivity"/>
 
     </application>
 
