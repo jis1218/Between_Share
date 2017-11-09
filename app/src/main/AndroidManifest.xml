@@ -13,7 +13,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden">
 
         </activity>
-        <activity android:name=".signinup.MainActivity">
+        <activity android:name=".signInAndUp.SignInActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -21,9 +21,14 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
-        <activity android:name=".signinup.SignUpActivity">
+        <activity android:name=".signInAndUp.SignUpActivity">
 
         </activity>
+        <activity android:name=".signInAndUp.AcceptActivity"/>
+        <activity android:name=".signInAndUp.PhoneConnectActivity"/>
+        <activity android:name=".signInAndUp.ProfileActivity"/>
+        <activity android:name=".signInAndUp.SignIn2Activity"/>
+
     </application>
 
 </manifest>
