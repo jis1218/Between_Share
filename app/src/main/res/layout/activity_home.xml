@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/default_picture"/>
+        app:srcCompat="@drawable/default_picture"
+        android:onClick="onClick"/>
 
     <include
         android:id="@+id/include2"
