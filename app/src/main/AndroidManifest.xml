@@ -20,18 +20,20 @@
         <activity android:name=".signInAndUp.PhoneConnectActivity" />
         <activity android:name=".signInAndUp.ProfileActivity" />
         <activity android:name=".signInAndUp.SignIn2Activity" />
-        <activity android:name=".AnniversaryAndCalendar.HomeActivity" />
-        <activity android:name=".AnniversaryAndCalendar.AnniversaryListActivity" />
-        <activity android:name=".AnniversaryAndCalendar.AnniversarySettingActivity" />
-        <activity android:name=".AnniversaryAndCalendar.CalendarViewActivity" />
-        <activity android:name=".AnniversaryAndCalendar.CalendarWriteActivity" />
-        <activity android:name=".signInAndUp.SplashActivity">
+        <activity android:name=".AnniversaryAndCalendar.HomeActivity" >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".AnniversaryAndCalendar.AnniversaryListActivity" />
+        <activity android:name=".AnniversaryAndCalendar.AnniversarySettingActivity" />
+        <activity android:name=".AnniversaryAndCalendar.CalendarViewActivity" />
+        <activity android:name=".AnniversaryAndCalendar.CalendarWriteActivity" />
+        <activity android:name=".signInAndUp.SplashActivity">
+
         </activity>
     </application>
 
