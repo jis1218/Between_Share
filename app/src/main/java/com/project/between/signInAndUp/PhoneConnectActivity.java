@@ -86,6 +86,7 @@ public class PhoneConnectActivity extends AppCompatActivity {
 
                     userRef.child(tempkey).child("roomID").child("id").setValue(chatRoom);
                     PreferenceUtil.setValue(PhoneConnectActivity.this, "chatroom", chatRoom);
+
                     moveToProfileActivity();
                     //moveToAcceptActivity(myNumber, friendNumber);
 
