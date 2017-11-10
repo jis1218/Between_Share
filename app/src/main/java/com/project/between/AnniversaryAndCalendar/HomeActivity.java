@@ -130,6 +130,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
                         ivBackground.setImageBitmap(bitmap);
+
+                        saveDB();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -139,5 +141,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(getApplicationContext(), "Cancelled", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void saveDB() {
+
     }
 }
