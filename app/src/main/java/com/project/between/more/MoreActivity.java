@@ -46,20 +46,20 @@ public class MoreActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initInfo() {
         database = FirebaseDatabase.getInstance();
-        final String myEmail = "plemonple@naver_com";
-
+//        final String myEmail = "plemonple@naver_com";
+//        Log.e("userRef",userRef.toString()+"");
+//        Log.e("=====Email",myEmail+"");Log.e("==========",""+myEmail);
         userRef = database.getReference("user");
-             Log.e("userRef",userRef.toString()+"");
-             Log.e("=====Email",myEmail+"");
+
         if(userRef!=null) {
 
-            Log.e("==========",""+myEmail);
+
             String useremail=PreferenceUtil.getStringValue(this,"userEmail");
 
             Log.e("=======","========================================");
             Log.e("useremail",useremail);
             Log.e("=======","========================================");
-            final DatabaseReference myInfo = userRef.child(myEmail);
+            final DatabaseReference myInfo = userRef.child(useremail.replace(".","_"));
 
             ValueEventListener placeListener = new ValueEventListener() {
                 @Override
