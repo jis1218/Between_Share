@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.project.between.R;
 import com.project.between.util.PreferenceUtil;
 import com.project.between.util.TimeConverter;
 import com.project.between.domain.MyMessage;

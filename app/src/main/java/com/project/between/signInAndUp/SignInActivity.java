@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import com.project.between.R;
 
 
 public class SignInActivity extends AppCompatActivity {
@@ -25,6 +26,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 intent = new Intent(SignInActivity.this, SignIn2Activity.class);
+
                 startActivity(intent);
 
             }
@@ -34,6 +36,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 intent2 = new Intent(SignInActivity.this, SignUpActivity.class);
+                intent2.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent2);
 
             }

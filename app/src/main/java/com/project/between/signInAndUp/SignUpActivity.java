@@ -24,6 +24,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.project.between.util.DialogUtil;
 import com.project.between.util.PreferenceUtil;
 import com.project.between.util.VerificationUtil;
+import com.project.between.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -70,7 +71,9 @@ public class SignUpActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             DialogUtil.showDialog("이메일을 발송하였습니다.", SignUpActivity.this, true);
                                             moveToNext();
-                                            //PreferenceUtil.setValue("userEmail", email);
+                                            PreferenceUtil.setValue(SignUpActivity.this, "userEmail", email);
+                                            PreferenceUtil.setValue(SignUpActivity.this, "password", password);
+                                            PreferenceUtil.setValue(SignUpActivity.this, "autoSignin", "true");
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -100,6 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void moveToNext() {
         Intent intent = new Intent(SignUpActivity.this, PhoneConnectActivity.class);
         intent.putExtra("tempKey", tempKey);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

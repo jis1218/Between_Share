@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.project.between.R;
 import com.project.between.domain.MyMessage;
 import com.project.between.util.PreferenceUtil;
 
