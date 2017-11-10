@@ -17,4 +17,6 @@ public class TimeConverter {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일", Locale.KOREAN);
         return sdf.format(time);
     }
+
+
 }

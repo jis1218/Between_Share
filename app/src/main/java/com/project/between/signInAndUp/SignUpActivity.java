@@ -21,9 +21,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.project.between.util.DialogUtil;
+import com.project.between.util.PreferenceUtil;
+import com.project.between.util.VerificationUtil;
 import com.project.between.R;
-import com.project.between.verificationUtil_js.DialogUtil;
-import com.project.between.verificationUtil_js.VerificationUtil;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -70,6 +71,9 @@ public class SignUpActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             DialogUtil.showDialog("이메일을 발송하였습니다.", SignUpActivity.this, true);
                                             moveToNext();
+                                            PreferenceUtil.setValue(SignUpActivity.this, "userEmail", email);
+                                            PreferenceUtil.setValue(SignUpActivity.this, "password", password);
+                                            PreferenceUtil.setValue(SignUpActivity.this, "autoSignin", "true");
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -99,6 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void moveToNext() {
         Intent intent = new Intent(SignUpActivity.this, PhoneConnectActivity.class);
         intent.putExtra("tempKey", tempKey);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -114,7 +119,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        signUp_email_edit = findViewById(R.id.signUp_email_edit);
+        signUp_email_edit = (EditText) findViewById(R.id.signUp_email_edit);
         signUp_email_edit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -132,7 +137,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
-        signUp_password_edit = findViewById(R.id.signUp_password_edit);
+        signUp_password_edit = (EditText) findViewById(R.id.signUp_password_edit);
         signUp_password_edit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -150,7 +155,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
-        signUp_btn = findViewById(R.id.signUp_btn);
+        signUp_btn = (Button) findViewById(R.id.signUp_btn);
     }
 }
 

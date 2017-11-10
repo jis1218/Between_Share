@@ -11,11 +11,14 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import com.project.between.R;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.project.between.AnniversaryActivity;
-import com.project.between.R;
+import com.project.between.AnniversaryAndCalendar.HomeActivity;
+import com.project.between.chatting.ChattingActivity;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 
@@ -78,8 +81,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void movetohome(View view) {
         addDatabase();
-        Intent intent = new Intent(ProfileActivity.this, AnniversaryActivity.class);
-        startActivity(intent);
+        Intent intentForHome = new Intent(ProfileActivity.this, HomeActivity.class);
+        startActivity(intentForHome);
+        Intent intentForChat = new Intent(ProfileActivity.this, ChattingActivity.class);
+        intentForChat.putExtra("tempkey", tempkey);
+        startActivity(intentForChat);
 
     }
 
@@ -100,14 +106,14 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void init() {
-        textViewBirthday = findViewById(R.id.textViewBirthday);
-        textViewFirstday = findViewById(R.id.textViewFirstday);
+        textViewBirthday = (TextView) findViewById(R.id.textViewBirthday);
+        textViewFirstday = (TextView) findViewById(R.id.textViewFirstday);
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
-        name_edit = findViewById(R.id.name_edit);
-        start_btn = findViewById(R.id.start_btn);
-        radiogender = findViewById(R.id.radiogender);
+        name_edit = (EditText) findViewById(R.id.name_edit);
+        start_btn = (Button) findViewById(R.id.start_btn);
+        radiogender = (RadioGroup) findViewById(R.id.radiogender);
     }
 }

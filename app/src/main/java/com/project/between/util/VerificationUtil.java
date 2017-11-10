@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  * Created by 정인섭 on 2017-11-03.
  */
 
-public class VeriUtil {
+public class VerificationUtil {
 
     public static boolean isValidEmail(String email) {
         String regex = "^[_A-Za-z0-9-]+(.[_A-Za-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
@@ -16,6 +16,7 @@ public class VeriUtil {
 
         return m.matches();
     }
+
 
     public static boolean isValidPassword(String password) {
         // 영문자와 숫자만 허용

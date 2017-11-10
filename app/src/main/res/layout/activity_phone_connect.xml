@@ -14,6 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="100dp"
         android:ems="10"
+        android:phoneNumber="true"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -41,6 +42,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="200dp"
         android:ems="10"
+        android:phoneNumber="true"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,6 +88,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.418"
         app:srcCompat="@android:drawable/sym_action_call" />
+
 
 
 </android.support.constraint.ConstraintLayout>

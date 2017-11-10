@@ -1,4 +1,4 @@
-package com.project.between;
+package com.project.between.chatting;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.project.between.R;
 import com.project.between.domain.MyMessage;
-import com.project.between.domain.User;
 import com.project.between.util.PreferenceUtil;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyAdap
     @Override
     public int getItemViewType(int position) {
 
-        if ((list.get(position).user_id).equals(PreferenceUtil.getStringValue(context,"user_id"))) {
+        if ((list.get(position).user_num).equals(PreferenceUtil.getStringValue(context,"myNum"))) {
             return MY_MESSAGE;
         } else {
             return YOUR_MESSAGE;

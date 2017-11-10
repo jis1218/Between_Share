@@ -1,5 +1,6 @@
-package com.project.between;
+package com.project.between.chatting;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,7 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.project.between.domain.User;
+import com.project.between.R;
 import com.project.between.util.PreferenceUtil;
 import com.project.between.util.TimeConverter;
 import com.project.between.domain.MyMessage;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 public class ChattingActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
-    DatabaseReference userRef;
+    DatabaseReference roomInfoRef;
     DatabaseReference roomRef;
     FirebaseAuth mAuth;
     FirebaseUser user;
@@ -40,6 +41,7 @@ public class ChattingActivity extends AppCompatActivity {
     Button buttonSendMessage;
     RecyclerAdapter adapter;
     MyMessage message;
+    String roomID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +68,15 @@ public class ChattingActivity extends AppCompatActivity {
     }
 
     private void setInstanceOfDatabase() {
+
         database = FirebaseDatabase.getInstance();
-        userRef = database.getReference("user");
-        roomRef = database.getReference("room").child("happy");
+
+        String result = PreferenceUtil.getStringValue(ChattingActivity.this, "chatroom");
+
+        roomRef = database.getReference("chatRoom").child(result);
         message = new MyMessage();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        Log.d("user_id", user.getUid());
     }
 
     private void getMessageFromDatabase() {
@@ -98,9 +102,8 @@ public class ChattingActivity extends AppCompatActivity {
 
     //누르면 메세지 보내는 버튼 리스너 함수
     public void sendMessage(View view) {
-        Toast.makeText(this, "하하하", Toast.LENGTH_SHORT).show();
         message.message = editTextPutMessage.getText().toString();
-        message.user_id = PreferenceUtil.getStringValue(this, "user_id");
+        message.user_num = PreferenceUtil.getStringValue(this, "myNum");
         message.messageTime = TimeConverter.timeConverterMinute(System.currentTimeMillis());
         message.messageDate = TimeConverter.timeConverterDate(System.currentTimeMillis());
         editTextPutMessage.setText("");

@@ -10,7 +10,7 @@ import android.content.DialogInterface;
 
 public class DialogUtil {
 
-    public static void showdialog(String msg, final Activity activity, final boolean activityFinish){
+    public static void showDialog(String msg, final Activity activity, final boolean activityFinish){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity); //getBaseContext()는 Context의 요소만 사용, this를 사용하면 Context 밑에 다른 요소들도 사용 가능 (ContextWrapper, Themecontext 등등)
         dialogBuilder.setTitle("알림")
                 .setMessage(msg)
@@ -22,5 +22,6 @@ public class DialogUtil {
                     }
                 })
                 .show();
+
     }
 }
