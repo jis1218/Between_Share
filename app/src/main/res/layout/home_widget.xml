@@ -34,6 +34,9 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:text="테스트"
+                android:shadowDx="2.0"
+                android:shadowDy="2.0"
+                android:shadowRadius="2.0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -44,6 +47,9 @@
                 android:layout_height="wrap_content"
                 android:text="1000일 남음"
                 android:textSize="24sp"
+                android:shadowDx="2.0"
+                android:shadowDy="2.0"
+                android:shadowRadius="2.0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -86,8 +92,15 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="내이름"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:shadowColor="#FF464646"
+            android:shadowDx="2.0"
+            android:shadowDy="2.0"
+            android:shadowRadius="2.0"
             app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/tvAddHomeAnniversary" />
+            app:layout_constraintTop_toBottomOf="@+id/tvAddHomeAnniversary"
+            />
 
         <TextView
             android:id="@+id/textView4"
@@ -97,6 +110,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="★"
+            android:textStyle="bold"
             android:textColor="#d40000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -109,6 +123,12 @@
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             android:text="님이름"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:shadowColor="#FF464646"
+            android:shadowDx="2.0"
+            android:shadowDy="2.0"
+            android:shadowRadius="2.0"
             app:layout_constraintEnd_toStartOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/tvAddHomeAnniversary" />
     </android.support.constraint.ConstraintLayout>

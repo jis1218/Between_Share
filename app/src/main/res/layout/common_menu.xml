@@ -5,9 +5,9 @@
     android:id="@+id/commonMenu"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-
+    android:orientation="horizontal"
+    android:weightSum="3"
+    android:background="#FFFFFF">
     <ImageButton
         android:id="@+id/btnCommonHome"
         android:layout_width="wrap_content"
@@ -15,16 +15,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:background="#00ffffff"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
-
-    <ImageButton
-        android:id="@+id/btnCommonAlbum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:background="#00ffffff"
-        app:srcCompat="@android:drawable/btn_star_big_off" />
+        app:srcCompat="@drawable/home_on" />
 
     <ImageButton
         android:id="@+id/btnCommonChatting"
@@ -33,16 +24,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:background="#00ffffff"
-        app:srcCompat="@mipmap/ic_launcher_round" />
-
-    <ImageButton
-        android:id="@+id/btnCommonNotification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:background="#00ffffff"
-        app:srcCompat="@android:drawable/btn_star_big_off" />
+        app:srcCompat="@drawable/chatting_off" />
 
     <ImageButton
         android:id="@+id/btnCommonMore"
@@ -51,5 +33,5 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:background="#00ffffff"
-        app:srcCompat="@android:drawable/btn_star_big_off" />
+        app:srcCompat="@drawable/my_off" />
 </LinearLayout>

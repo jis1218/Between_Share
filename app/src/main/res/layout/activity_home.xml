@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
+        app:srcCompat="@drawable/default_picture"
+        android:onClick="onClick"/>
 
     <include
         android:id="@+id/include2"
@@ -35,7 +36,7 @@
         android:id="@+id/include"
         layout="@layout/common_menu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45sp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
