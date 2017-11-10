@@ -5,12 +5,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.project.between.R;
 import com.project.between.domain.MyMessage;
 import com.project.between.util.PreferenceUtil;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -60,6 +64,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyAdap
     public void onBindViewHolder(MyAdapter holder, int position) {
         holder.textViewMyChat.setText(list.get(position).message);
         holder.textViewTime.setText(list.get(position).messageTime);
+        holder.profileUrl = list.get(position).profileUrl;
+        URL url = null;
+        try {
+            url = new URL(holder.profileUrl);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Glide.with(context).load(url).into(holder.imageProfile);
+
+
         holder.textViewDivideLine.setText("------------------------ " + list.get(position).messageDate + "-----------------------");
         if(position>=1 && list.get(position).messageDate.equals(list.get(position-1).messageDate)){
             holder.textViewDivideLine.setVisibility(View.GONE);
@@ -77,6 +91,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyAdap
         TextView textViewMyChat;
         TextView textViewTime;
         TextView textViewDivideLine;
+        ImageView imageProfile;
+        String profileUrl;
+
 
         public MyAdapter(View itemView) {
             super(itemView);
@@ -84,6 +101,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyAdap
             textViewMyChat = itemView.findViewById(R.id.textViewMyChat);
             textViewTime = itemView.findViewById(R.id.textViewTime);
             textViewDivideLine = itemView.findViewById(R.id.textViewDivideLine);
+            imageProfile = itemView.findViewById(R.id.imageProfile);
+
+
         }
     }
 }

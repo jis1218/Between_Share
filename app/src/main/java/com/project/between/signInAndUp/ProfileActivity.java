@@ -2,15 +2,27 @@ package com.project.between.signInAndUp;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.project.between.R;
 
 import com.google.firebase.database.DatabaseReference;
@@ -37,8 +49,11 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference userRef;
     DatabaseReference photoRef;
+    StorageReference storageRef;
     String gender;
     String name;
+    Uri downloadUrl;
+    ImageView imageProfile;
 
 
     @Override
@@ -50,8 +65,7 @@ public class ProfileActivity extends AppCompatActivity {
         String photoRoom = PreferenceUtil.getStringValue(this, "photoroom");
         String myNum = PreferenceUtil.getStringValue(this, "myNum");
         photoRef = database.getReference("photo").child(photoRoom).child("profile").child(myNum);
-
-
+        storageRef = FirebaseStorage.getInstance().getReference();
 
         getIntentFromPhoneConnectActivity();
 
@@ -88,9 +102,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void movetohome(View view) {
         addDatabase();
-        photoRef.setValue("gggg");
+
         Intent intentForHome = new Intent(ProfileActivity.this, HomeActivity.class);
         intentForHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intentForHome.putExtra("profileImg", downloadUrl.toString());
+        photoRef.setValue(downloadUrl.toString());
         startActivity(intentForHome);
         Intent intentForChat = new Intent(ProfileActivity.this, ChattingActivity.class);
         intentForChat.putExtra("tempkey", tempkey);
@@ -125,5 +141,47 @@ public class ProfileActivity extends AppCompatActivity {
         name_edit = (EditText) findViewById(R.id.name_edit);
         start_btn = (Button) findViewById(R.id.start_btn);
         radiogender = (RadioGroup) findViewById(R.id.radiogender);
+        imageProfile = findViewById(R.id.imageProfile);
     }
+
+    public void imageUpload(View view) {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent.createChooser(intent, "Select App"),999);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+//            String realPath = RealPathUtil.getRealPath(this, uri);
+//            upload(realPath);
+            upload(uri);
+        }
+    }
+    private void upload(Uri file) {
+        // 파이어베이스의 스토리지 파일node
+        String temp[] = file.getPath().split("/"); // 파일이름 꺼내는건 다시
+        String filename = temp[temp.length - 1];
+        StorageReference riversRef = storageRef.child("files/" + filename);
+        riversRef.putFile(file).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                downloadUrl = taskSnapshot.getDownloadUrl();
+                Log.d("Storage", "downloadUrl=" + downloadUrl.getPath());
+                Glide.with(ProfileActivity.this)                 // 글라이드 초기화
+                        .load(downloadUrl).into(imageProfile);
+                Log.e("이미지 로딩","잘 들어오나"+downloadUrl);
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(ProfileActivity.this
+                                , exception.getMessage()
+                                , Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 }

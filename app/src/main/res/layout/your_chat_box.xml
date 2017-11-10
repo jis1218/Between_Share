@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -19,8 +20,9 @@
         android:id="@+id/textViewMyChat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentRight="false"
+        android:layout_toRightOf="@+id/imageProfile"
+        android:layout_toEndOf="@+id/imageProfile"
+
         android:layout_below="@+id/textViewDivideLine"
         android:layout_margin="4dp"
         android:background="@android:color/holo_orange_light"
@@ -37,4 +39,18 @@
         android:layout_alignBottom="@+id/textViewMyChat"
         android:layout_toRightOf="@+id/textViewMyChat"
         android:layout_toEndOf="@+id/textViewMyChat" />
+
+    <ImageView
+        android:id="@+id/imageProfile"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/textViewTime"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
 </RelativeLayout>

@@ -43,6 +43,10 @@ public class ChattingActivity extends AppCompatActivity {
     RecyclerAdapter adapter;
     MyMessage message;
     String roomID;
+    String myNum;
+    String friendNum;
+    String myProfileUrl;
+    String friendProfileUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,7 @@ public class ChattingActivity extends AppCompatActivity {
         setInstanceOfDatabase();
         setRecyclerListener();
         getMessageFromDatabase();
+
         setSupportActionBar(toolbarChattingActivity);
     }
 
@@ -66,6 +71,7 @@ public class ChattingActivity extends AppCompatActivity {
         recyclerViewChatting = (RecyclerView) findViewById(R.id.recyclerViewChatting);
         editTextPutMessage = (EditText) findViewById(R.id.editTextPutMessage);
         buttonSendMessage = (Button) findViewById(R.id.buttonSendMessage);
+        myNum = PreferenceUtil.getStringValue(this, "myNum");
     }
 
     private void setInstanceOfDatabase() {
@@ -76,9 +82,31 @@ public class ChattingActivity extends AppCompatActivity {
         String photoRoom = PreferenceUtil.getStringValue(this, "photoroom");
 
         roomRef = database.getReference("chatRoom").child(result);
+        profileRef = database.getReference("photo").child(photoRoom).child("profile");
         message = new MyMessage();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+        getProfileUrl();
+    }
+
+    private void getProfileUrl() {
+        profileRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Toast.makeText(getBaseContext(), "작동", Toast.LENGTH_SHORT).show();
+                    myProfileUrl = dataSnapshot.child(myNum).getValue(String.class);
+                    Log.d("=======", myProfileUrl);
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void getMessageFromDatabase() {
@@ -91,7 +119,7 @@ public class ChattingActivity extends AppCompatActivity {
                     list.add(message);
                 }
                 adapter.refreshData(list);
-                recyclerViewChatting.scrollToPosition(list.size()-1); //chat이 추가될 때마다 RecyclerView의 스크롤을 밑으로 내려줌
+                recyclerViewChatting.scrollToPosition(list.size() - 1); //chat이 추가될 때마다 RecyclerView의 스크롤을 밑으로 내려줌
             }
 
             @Override
@@ -105,9 +133,12 @@ public class ChattingActivity extends AppCompatActivity {
     //누르면 메세지 보내는 버튼 리스너 함수
     public void sendMessage(View view) {
         message.message = editTextPutMessage.getText().toString();
-        message.user_num = PreferenceUtil.getStringValue(this, "myNum");
+        message.user_num = myNum;
         message.messageTime = TimeConverter.timeConverterMinute(System.currentTimeMillis());
         message.messageDate = TimeConverter.timeConverterDate(System.currentTimeMillis());
+        message.profileUrl = myProfileUrl;
+        Log.d("====", myProfileUrl);
+
         editTextPutMessage.setText("");
         String time = String.valueOf(System.currentTimeMillis());
         roomRef.child(time).setValue(message);
