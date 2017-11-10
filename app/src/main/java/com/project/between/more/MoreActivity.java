@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.project.between.R;
+import com.project.between.signInAndUp.SignUpActivity;
 import com.project.between.signInAndUp.User;
 import com.project.between.util.PreferenceUtil;
 
@@ -45,14 +46,20 @@ public class MoreActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initInfo() {
         database = FirebaseDatabase.getInstance();
-        final String myEmail = PreferenceUtil.getStringValue(this, "userEmail");
+        final String myEmail = "plemonple@naver_com";
+
         userRef = database.getReference("user");
              Log.e("userRef",userRef.toString()+"");
-             Log.e("myEmail",myEmail+"");
+             Log.e("=====Email",myEmail+"");
         if(userRef!=null) {
 
             Log.e("==========",""+myEmail);
-            final DatabaseReference myInfo = userRef.child("plemonple@naver_com");
+            String useremail=PreferenceUtil.getStringValue(this,"userEmail");
+
+            Log.e("=======","========================================");
+            Log.e("useremail",useremail);
+            Log.e("=======","========================================");
+            final DatabaseReference myInfo = userRef.child(myEmail);
 
             ValueEventListener placeListener = new ValueEventListener() {
                 @Override
