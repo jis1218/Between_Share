@@ -60,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, "확인", Toast.LENGTH_SHORT).show();
-                            final FirebaseUser fUser = auth.getCurrentUser();
+                            FirebaseUser fUser = auth.getCurrentUser();
 //                            UserProfileChangeRequest.Builder profile = new UserProfileChangeRequest.Builder();
 //                            profile.setDisplayName(email);
 //                            fUser.updateProfile(profile.build());

@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Between.iml" filepath="$PROJECT_DIR$/Between.iml" />
       <module fileurl="file://D:\0_Fast_Campus\Android3.0\Between_Share2\Between_Share.iml" filepath="D:\0_Fast_Campus\Android3.0\Between_Share2\Between_Share.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Between_Share2.iml" filepath="$PROJECT_DIR$/Between_Share2.iml" />
+      <module fileurl="file://D:\Android\AndroidProjects\Between\Between_Share2.iml" filepath="D:\Android\AndroidProjects\Between\Between_Share2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\Android\AndroidProjects\Between\app\app.iml" filepath="D:\Android\AndroidProjects\Between\app\app.iml" />
     </modules>
   </component>
 </project>
