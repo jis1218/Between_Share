@@ -102,7 +102,7 @@
                 </android.support.constraint.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/tvTitle"
+                    android:id="@+id/tvCustomTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -120,10 +120,10 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvCustomTitle" />
 
                 <TextView
-                    android:id="@+id/tvDate"
+                    android:id="@+id/tvCustomDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -141,7 +141,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDate"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCustomDate"
                     tools:listitem="@layout/item_list_anniversary_list_day" />
 
             </android.support.constraint.ConstraintLayout>

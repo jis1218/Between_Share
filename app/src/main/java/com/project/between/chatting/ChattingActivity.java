@@ -103,7 +103,7 @@ public class ChattingActivity extends AppCompatActivity {
     //누르면 메세지 보내는 버튼 리스너 함수
     public void sendMessage(View view) {
         message.message = editTextPutMessage.getText().toString();
-        message.user_id = PreferenceUtil.getStringValue(this, "user_id");
+        message.user_num = PreferenceUtil.getStringValue(this, "myNum");
         message.messageTime = TimeConverter.timeConverterMinute(System.currentTimeMillis());
         message.messageDate = TimeConverter.timeConverterDate(System.currentTimeMillis());
         editTextPutMessage.setText("");

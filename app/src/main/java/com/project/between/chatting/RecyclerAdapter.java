@@ -35,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyAdap
     @Override
     public int getItemViewType(int position) {
 
-        if ((list.get(position).user_id).equals(PreferenceUtil.getStringValue(context,"user_id"))) {
+        if ((list.get(position).user_num).equals(PreferenceUtil.getStringValue(context,"myNum"))) {
             return MY_MESSAGE;
         } else {
             return YOUR_MESSAGE;

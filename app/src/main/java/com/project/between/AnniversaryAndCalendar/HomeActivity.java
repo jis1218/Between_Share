@@ -26,7 +26,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         initView();
         initListener();
-        initFragment();
+//        initFragment();
     }
     public void initFragment(){
         Log.e("---------Activity----","  [Add] ListFragment()-----");
