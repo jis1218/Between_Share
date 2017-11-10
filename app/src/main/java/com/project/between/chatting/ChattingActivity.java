@@ -32,6 +32,7 @@ public class ChattingActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference roomInfoRef;
     DatabaseReference roomRef;
+    DatabaseReference profileRef;
     FirebaseAuth mAuth;
     FirebaseUser user;
 
@@ -72,6 +73,7 @@ public class ChattingActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
 
         String result = PreferenceUtil.getStringValue(ChattingActivity.this, "chatroom");
+        String photoRoom = PreferenceUtil.getStringValue(this, "photoroom");
 
         roomRef = database.getReference("chatRoom").child(result);
         message = new MyMessage();

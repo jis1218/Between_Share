@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.project.between.AnniversaryAndCalendar.HomeActivity;
 import com.project.between.chatting.ChattingActivity;
+import com.project.between.util.PreferenceUtil;
 
 import org.w3c.dom.Text;
 
@@ -35,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
     String tempkey;
     FirebaseDatabase database;
     DatabaseReference userRef;
+    DatabaseReference photoRef;
     String gender;
     String name;
 
@@ -45,6 +47,11 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("user");
+        String photoRoom = PreferenceUtil.getStringValue(this, "photoroom");
+        String myNum = PreferenceUtil.getStringValue(this, "myNum");
+        photoRef = database.getReference("photo").child(photoRoom).child("profile").child(myNum);
+
+
 
         getIntentFromPhoneConnectActivity();
 
@@ -77,18 +84,13 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-        
     }
 
     public void movetohome(View view) {
         addDatabase();
+        photoRef.setValue("gggg");
         Intent intentForHome = new Intent(ProfileActivity.this, HomeActivity.class);
+        intentForHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intentForHome);
         Intent intentForChat = new Intent(ProfileActivity.this, ChattingActivity.class);
         intentForChat.putExtra("tempkey", tempkey);
@@ -104,6 +106,7 @@ public class ProfileActivity extends AppCompatActivity {
         userRef.child(tempkey).child("birthday").setValue(birthday);
         userRef.child(tempkey).child("firstday").setValue(firstday);
         userRef.child(tempkey).child("gender").setValue(gender);
+        PreferenceUtil.setValue(ProfileActivity.this, "autoSignin", "true");
     }
 
 

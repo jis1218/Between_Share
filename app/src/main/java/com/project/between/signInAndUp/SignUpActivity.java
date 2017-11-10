@@ -73,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             moveToNext();
                                             PreferenceUtil.setValue(SignUpActivity.this, "userEmail", email);
                                             PreferenceUtil.setValue(SignUpActivity.this, "password", password);
-                                            PreferenceUtil.setValue(SignUpActivity.this, "autoSignin", "true");
+
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -103,7 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void moveToNext() {
         Intent intent = new Intent(SignUpActivity.this, PhoneConnectActivity.class);
         intent.putExtra("tempKey", tempKey);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

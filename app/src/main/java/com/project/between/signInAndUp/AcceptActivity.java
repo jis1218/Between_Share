@@ -28,6 +28,7 @@ public class AcceptActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference userRef;
     DatabaseReference myNumRef;
+    DatabaseReference photoRef;
 
     String myNumber;
     String friendNumber;
@@ -40,6 +41,7 @@ public class AcceptActivity extends AppCompatActivity {
         setContentView(R.layout.activity_accept);
         Intent intent = getIntent();
         myNumber = intent.getStringExtra("myNumber");
+        friendNumber = intent.getStringExtra("friendNumber");
         tempkey = intent.getStringExtra("tempkey2");
 
         database = FirebaseDatabase.getInstance();
