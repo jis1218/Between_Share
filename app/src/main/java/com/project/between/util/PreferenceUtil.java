@@ -22,8 +22,6 @@ public class PreferenceUtil {
         editor.commit();
 
     }
-
-
     public static void setValue(Context context, String key, long value){
         SharedPreferences.Editor editor = getPreference(context).edit();
         editor.putLong(key, value);

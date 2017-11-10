@@ -49,6 +49,22 @@ public class User {
         this.gender = gender;
     }
 
+    @Override
+    public String toString(){
+
+        return this.id +" "+
+        this.name +" "+
+        this.email+" "+
+        this.password+" "+
+        this.phone +" "+
+        this.friend_phone+" "+
+        this.message+" "+
+        this.token +" "+
+        this.notification+" "+
+        this.joinDate+" "+
+        this.birth +" "+
+        this.gender ;
+    }
 
 
 }
