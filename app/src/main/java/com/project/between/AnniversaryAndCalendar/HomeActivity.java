@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.project.between.R;
 import com.project.between.chatting.ChattingActivity;
+import com.project.between.more.MoreActivity;
 
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -77,13 +78,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 btnCommonMore.setImageResource(R.drawable.my_off);
                 break;
             case R.id.btnCommonMore :
-                btnCommonHome.setImageResource(R.drawable.home_off);
-                btnCommonMore.setImageResource(R.drawable.my_on);
+//                btnCommonHome.setImageResource(R.drawable.home_off);
+//                btnCommonMore.setImageResource(R.drawable.my_on);
+                startActivity(new Intent(HomeActivity.this, MoreActivity.class));
                 break;
             case R.id.btnCommonChatting:
-                Log.e("===========","여기까지 왔니");
                 startActivity(new Intent(HomeActivity.this, ChattingActivity.class));
-                Toast.makeText(HomeActivity.this, "채팅 activity 시작 ",Toast.LENGTH_SHORT).show();
                 break;
         }
     }
