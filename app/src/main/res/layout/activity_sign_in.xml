@@ -28,7 +28,7 @@
 
             android:layout_height="match_parent"
 
-            android:src="@drawable/ballo" />
+            android:src="@drawable/maple" />
 
 
         <ImageView
@@ -39,7 +39,7 @@
 
             android:layout_height="match_parent"
 
-            android:src="@drawable/ballon1" />
+            android:src="@drawable/couple" />
 
 
         <ImageView
@@ -50,7 +50,7 @@
 
             android:layout_height="match_parent"
 
-            android:src="@drawable/ballo" />
+            android:src="@drawable/couple2" />
 
 
     </ViewFlipper>

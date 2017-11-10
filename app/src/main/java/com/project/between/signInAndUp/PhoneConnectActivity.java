@@ -103,7 +103,7 @@ public class PhoneConnectActivity extends AppCompatActivity {
                     Toast.makeText(PhoneConnectActivity.this, "가진 사용자 있음", Toast.LENGTH_LONG).show();
                     dataSnapshot.child(friendNumber).child("status").child("confirm").getRef().setValue("yes");
                     String chatRoom = friendNumber+ myNumber + "chat";
-                    String photoRoom = myNumber + friendNumber + "photo";
+                    String photoRoom = friendNumber + myNumber + "photo";
                     userRef.child(tempkey).child("roomID").child("id").setValue(friendNumber+ myNumber + "chat");
                     userRef.child(tempkey).child("photoID").child("id").setValue(photoRoom);
                     PreferenceUtil.setValue(PhoneConnectActivity.this, "chatroom", chatRoom);

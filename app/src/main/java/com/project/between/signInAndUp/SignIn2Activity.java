@@ -60,7 +60,7 @@ public class SignIn2Activity extends AppCompatActivity {
 
     public void signin(View view) {
         final String email = signUp_email_edit.getText().toString();
-        String password = signUp_password_edit.getText().toString();
+        final String password = signUp_password_edit.getText().toString();
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -77,6 +77,9 @@ public class SignIn2Activity extends AppCompatActivity {
                                     String myNum = dataSnapshot.child("myPhone").getValue(String.class);
                                     PreferenceUtil.setValue(SignIn2Activity.this, "chatroom", roomID);
                                     PreferenceUtil.setValue(SignIn2Activity.this, "myNum", myNum);
+                                    PreferenceUtil.setValue(SignIn2Activity.this, "userEmail", email);
+                                    PreferenceUtil.setValue(SignIn2Activity.this, "password", password);
+                                    PreferenceUtil.setValue(SignIn2Activity.this, "autoSignin", "true");
                                     //PreferenceUtil.setValue(SignIn2Activity.this, "photoroom", photoRoom);
                                 }
 
