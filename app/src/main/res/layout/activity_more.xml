@@ -39,12 +39,13 @@
                 android:textSize="18sp"
                 android:gravity="right"/>
             <EditText
+                android:id="@+id/etName"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_weight="80"
                 android:text=""
                 android:enabled="false"
-                android:paddingLeft="12sp"/>
+                />
         </TableRow>
         <TableRow android:weightSum="100">
             <TextView
@@ -55,12 +56,13 @@
                 android:textSize="18sp"
                 android:gravity="right"/>
             <EditText
+                android:id="@+id/etBirtyday"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_weight="80"
                 android:text=""
                 android:enabled="false"
-                android:paddingLeft="12sp"/>
+                />
         </TableRow>
         <TableRow android:weightSum="100">
             <TextView
@@ -71,12 +73,13 @@
                 android:textSize="18sp"
                 android:gravity="right"/>
             <EditText
+                android:id="@+id/etGender"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_weight="80"
                 android:text=""
                 android:enabled="false"
-                android:paddingLeft="12sp"/>
+                />
         </TableRow>
         <TableRow android:weightSum="100">
             <TextView
@@ -87,12 +90,12 @@
                 android:textSize="18sp"
                 android:gravity="right"/>
             <EditText
+                android:id="@+id/etPhoneNumber"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_weight="80"
                 android:text=""
-                android:enabled="false"
-                android:paddingLeft="12sp"/>
+                android:enabled="false" />
         </TableRow>
     </TableLayout>
 </LinearLayout>

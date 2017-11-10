@@ -5,26 +5,87 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.project.between.R;
+import com.project.between.signInAndUp.User;
+import com.project.between.util.PreferenceUtil;
 
 public class MoreActivity extends AppCompatActivity implements View.OnClickListener{
     private static final int SELECT_IMAGE = 1101;
     private ImageView ivSumNail;
+    private EditText etName;
+    private EditText etBirthday;
+    private EditText etGender;
+    private EditText etPhoneNumber;
+    private FirebaseDatabase database;
+    private DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more);
-        ivSumNail=(ImageView)findViewById(R.id.ivSumNail);
+
+        initView();
+        initInfo();
     }
 
+    private void initInfo() {
+        database = FirebaseDatabase.getInstance();
+        final String myEmail = PreferenceUtil.getStringValue(this, "userEmail");
+        userRef = database.getReference("user");
+             Log.e("userRef",userRef.toString()+"");
+             Log.e("myEmail",myEmail+"");
+        if(userRef!=null) {
+
+            Log.e("==========",""+myEmail);
+            final DatabaseReference myInfo = userRef.child("plemonple@naver_com");
+
+            ValueEventListener placeListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    String name=dataSnapshot.child("name").getValue()+"";
+                    String birthday=dataSnapshot.child("birthday").getValue()+"";
+                    String gender=dataSnapshot.child("gender").getValue()+"";
+                    String phone=dataSnapshot.child("myPhone").getValue()+"";
+
+                    etName.setText(name);
+                    etBirthday.setText(birthday);
+                    etGender.setText(gender);
+                    etPhoneNumber.setText(phone);
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(getApplicationContext(), "취소 됨", Toast.LENGTH_SHORT).show();
+                }
+            };
+            myInfo.addListenerForSingleValueEvent(placeListener);
+            //TODO: 비트맵 파일로 변환해서 이미지 뷰에 넣을것
+            //photoRef = database.getReference("photo").child(photoRoom).child("profile").child(myNum);
+        }
+    }
+
+    public void initView(){
+        ivSumNail=(ImageView)findViewById(R.id.ivSumNail);
+        etName=(EditText)findViewById(R.id.etName);
+        etBirthday=(EditText)findViewById(R.id.etBirtyday);
+        etGender=(EditText)findViewById(R.id.etGender);
+        etPhoneNumber=(EditText)findViewById(R.id.etPhoneNumber);
+    }
     @Override
     public void onClick(View view) {
         int id = view.getId();
