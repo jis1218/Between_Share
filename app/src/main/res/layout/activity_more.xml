@@ -5,20 +5,94 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.project.between.more.MoreActivity"
+    android:paddingTop="100sp"
+    android:paddingLeft="19sp"
+    android:paddingRight="19sp"
     android:orientation="vertical"
-    android:paddingTop="30sp"
     >
-    <ImageView
-        android:layout_width="70sp"
-        android:layout_height="70sp"
-        android:scaleType="centerCrop"
-        android:clickable="true"
-        android:src="@drawable/ballon1"/>
-    <!--<TableLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--&gt;-->
-        <!--<TableRow>-->
-        <!--</TableRow>-->
-    <!--</TableLayout>-->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TableRow android:weightSum="100">
+            <ImageView
+                android:id="@+id/ivSumNail"
+                android:layout_width="118sp"
+                android:layout_height="118sp"
+                android:scaleType="centerCrop"
+                android:clickable="true"
+                android:src="@drawable/ballon1"
+                android:layout_weight="20"
+                android:onClick="onClick"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="80"
+                />
+        </TableRow>
+        <TableRow android:weightSum="100">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="20"
+                android:text="Name"
+                android:textSize="18sp"
+                android:gravity="right"/>
+            <EditText
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="80"
+                android:text=""
+                android:enabled="false"
+                android:paddingLeft="12sp"/>
+        </TableRow>
+        <TableRow android:weightSum="100">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="20"
+                android:text="Birthday"
+                android:textSize="18sp"
+                android:gravity="right"/>
+            <EditText
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="80"
+                android:text=""
+                android:enabled="false"
+                android:paddingLeft="12sp"/>
+        </TableRow>
+        <TableRow android:weightSum="100">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="20"
+                android:text="Gender"
+                android:textSize="18sp"
+                android:gravity="right"/>
+            <EditText
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="80"
+                android:text=""
+                android:enabled="false"
+                android:paddingLeft="12sp"/>
+        </TableRow>
+        <TableRow android:weightSum="100">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="20"
+                android:text="PhoneNumber"
+                android:textSize="18sp"
+                android:gravity="right"/>
+            <EditText
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_weight="80"
+                android:text=""
+                android:enabled="false"
+                android:paddingLeft="12sp"/>
+        </TableRow>
+    </TableLayout>
 </LinearLayout>
