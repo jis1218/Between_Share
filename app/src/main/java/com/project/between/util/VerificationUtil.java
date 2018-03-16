@@ -13,7 +13,6 @@ public class VerificationUtil {
         String regex = "^[_A-Za-z0-9-]+(.[_A-Za-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(email);
-
         return m.matches();
     }
 
@@ -23,7 +22,6 @@ public class VerificationUtil {
         String regex = "^[0-9A-Za-z]{8,14}$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(password);
-
         return m.matches();
     }
 
