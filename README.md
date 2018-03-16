@@ -161,7 +161,7 @@ public class AcceptActivity extends AppCompatActivity {
 }
 ```
 
-#### 1 대 1 채팅 구현
+#### 3. 1 대 1 채팅 구현
 - #### firebase DB의 데이터 모습과 실제 채팅 화면
 ![pic7](https://github.com/jis1218/Between_Share/blob/master/img/pic7.png)<br>
 
@@ -193,6 +193,63 @@ public class AcceptActivity extends AppCompatActivity {
     }
 ```
 
+- #### UI에서 나의 채팅과 상대방 채팅을 다르게 위치시키기 위해 viewType을 다르게 하여 inflate 되는 layout이 다르게 하였다.
+```java
+    @Override
+    public int getItemViewType(int position) {
+
+        /**
+         * SharedPreference에 저장된 나의 정보와 채팅에 담겨있는 user_num이 같을 경우 MY_MESSAGE를 반환한다.
+         * 아닐 경우 YOUR_MESSAGE를 반환한다.
+         */
+        if ((list.get(position).user_num).equals(PreferenceUtil.getStringValue(context,"myNum"))) {
+            return MY_MESSAGE;
+        } else {
+            return YOUR_MESSAGE;
+        }
+    }
+
+    @Override
+    public MyAdapter onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view;
+        // ViewType에 따라 어떤 view를 뿌려줄지 정한다.
+        if (viewType == MY_MESSAGE) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_chat_box, parent, false);
+            return new MyAdapter(view);
+        } else if (viewType == YOUR_MESSAGE) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.your_chat_box, parent, false);
+            return new MyAdapter(view);
+        }
+
+        return null;
+    }
+```
+
+- #### 채팅의 날짜가 다를 경우 "---------날짜---------"의 형태가 나오게 하였는데 viewHolder에 구현을 해놓고 시간이 다를 경우에만 VISIBLE이 되게 하였고 나머지의 경우에는 GONE이 되게 하였다.
+```java
+    @Override
+    public void onBindViewHolder(MyAdapter holder, int position) {
+        holder.textViewMyChat.setText(list.get(position).message);
+        holder.textViewTime.setText(list.get(position).messageTime);
+        holder.profileUrl = list.get(position).profileUrl;
+        URL url = null;
+        try {
+            url = new URL(holder.profileUrl);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        Glide.with(context).load(url).into(holder.imageProfile);
+
+
+        holder.textViewDivideLine.setText("------------------------ " + list.get(position).messageDate + "-----------------------");
+        if(position>=1 && list.get(position).messageDate.equals(list.get(position-1).messageDate)){
+            holder.textViewDivideLine.setVisibility(View.GONE);
+        }else{
+            holder.textViewDivideLine.setVisibility(View.VISIBLE);
+        }
+    }
+```
+
 ## 그 밖에 배운 점
 
 - #### SoftKeyboard 떴을 때 화면도 같이 위로 올라가는 방법 (그래야 UI를 가리지 않음)
@@ -219,7 +276,7 @@ private void getMessageFromDatabase() {
                 adapter.refreshData(list);
                 recyclerViewChatting.scrollToPosition(list.size()-1);
             }
-            ```
+```
 
 
 
