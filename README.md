@@ -200,7 +200,7 @@ public class AcceptActivity extends AppCompatActivity {
  ```
  <activity android:name=".ChattingActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
-            ```
+```
 adjustPan을 해야 적용이 되고 stateHidden은 activity를 처음 띄웠을 때 SoftKeyboard가 보이지 않는다.
 위와 같은 방법은 정적인 방법이고 동적인 방법은 java 코드에 직접 써서 해당 조건이 됐을 때 실행시키는 방법임
 
