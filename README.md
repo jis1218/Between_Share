@@ -239,8 +239,7 @@ public class AcceptActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Glide.with(context).load(url).into(holder.imageProfile);
-
-
+        
         holder.textViewDivideLine.setText("------------------------ " + list.get(position).messageDate + "-----------------------");
         if(position>=1 && list.get(position).messageDate.equals(list.get(position-1).messageDate)){
             holder.textViewDivideLine.setVisibility(View.GONE);
