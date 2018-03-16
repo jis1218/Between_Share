@@ -14,7 +14,7 @@
 ![pic2](https://github.com/jis1218/Between_Share/blob/master/img/pic2.png)<br>
 ![pic3](https://github.com/jis1218/Between_Share/blob/master/img/pic3.png)<br>
 
-## 담당한 부분 및 배운 것들
+## 담당한 부분
 ### by Insup Jung
 
 #### 1. 회원가입 기능
@@ -84,6 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 - #### 내가 나의 번호와 상대 번호를 입력하고 연결하기를 누르게 되면  addListenerForSingleValueEvent 메서드를 통해 서버의 temp 노드 아래에 상대방의 번호가 있는지 확인한다. 없다면 나의 번호를 이용해 노드를 추가하고 위의 그림과 같이 friendNumber와 status 노드를 추가하고 내용을 저장한다. status 밑에 confirm의 값으로는 "none"이 입력된다. 그리고 나서 대기화면으로 넘어가게 된다. 상대방이 나와 자기 번호를 입력하고 연결하기를 누르게 되면 역시나 addListenerForSingleValueEvent에서 상대 번호가 있는지 확인한 후 있다면 
 status 아래 confirm의 값을 "yes"로 바꾼다. 대기화면에 있던 나의 앱은 addValueEventListener 메서드를 통해 "yes"로 바뀐 것을 감지하고 다음 Activity로 넘어가게 된다.
+
 ```java
 public class PhoneConnectActivity extends AppCompatActivity {
     /**
@@ -161,26 +162,41 @@ public class AcceptActivity extends AppCompatActivity {
 ```
 
 #### 1 대 1 채팅 구현
+- #### firebase DB의 데이터 모습과 실제 채팅 화면
 ![pic7](https://github.com/jis1218/Between_Share/blob/master/img/pic7.png)<br>
 
+- #### chatRoom이란 Node 아래 '나의 번호 + 상대 번호 + chat' 형태로 node를 만들고 그 아래에는 채팅을 주고 받을 때마다 time stamp 형식으로 node가 생성된다. 그리고 그 아래에는 메시지 내용, 날짜, 시간, 프로필사진 url, 상대방 번호를 저장한다. (time stamp에 매번 저장하게 되면 프로필 사진이 바뀔 경우에 예전 채팅과 현재 채팅의 프로필 사진이 일치하지 않을 수도 있으므로 따로 user에서 불러오는 것이 더 좋을 듯 하다.)
 
+- #### 채팅 내용은 갱신이 될 때마다 addValueEvent가 호출이 되어 ArrayList에 담겨 RecyclerView로 뿌려주게 된다.
 
+```java
+ // ArrayList에 채팅 내용을 담아 RecyclerView에 뿌려준다.
+    private void getMessageFromDatabase() {
+        roomRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<MyMessage> list = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    MyMessage message = snapshot.getValue(MyMessage.class);
+                    list.add(message);
+                }
+                adapter.refreshData(list);
+                recyclerViewChatting.scrollToPosition(list.size() - 1); //chat이 추가될 때마다 RecyclerView의 스크롤을 밑으로 내려줌
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
 
+    }
+```
 
+## 그 밖에 배운 점
 
-
-
-
-
-
-
-
-
-
-SoftKeyboard 떴을 때 화면도 같이 위로 올라가는 방법 (그래야 UI를 가리지 않음)
- - manifest에 해당 activity 아래 다음과 같이 적는다
+- #### SoftKeyboard 떴을 때 화면도 같이 위로 올라가는 방법 (그래야 UI를 가리지 않음)
+ ##### manifest에 해당 activity 아래 다음과 같이 적는다
  ```
  <activity android:name=".ChattingActivity"
             android:windowSoftInputMode="adjustPan|stateHidden">
@@ -204,3 +220,17 @@ private void getMessageFromDatabase() {
                 recyclerViewChatting.scrollToPosition(list.size()-1);
             }
             ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
