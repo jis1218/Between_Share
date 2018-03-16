@@ -81,8 +81,8 @@ public class ChattingActivity extends AppCompatActivity {
         String result = PreferenceUtil.getStringValue(ChattingActivity.this, "chatroom");
         String photoRoom = PreferenceUtil.getStringValue(this, "photoroom");
 
-        roomRef = database.getReference("chatRoom").child(result);
-        profileRef = database.getReference("photo").child(photoRoom).child("profile");
+        roomRef = database.getReference("chatRoom").child(result); // Firebase에서 'chatRoom' 아래 result의 데이터를 받아온다. result는 접속 할 때 이미 정해져있다. (나의 번호 + 상대 번호 + "chat")
+        profileRef = database.getReference("photo").child(photoRoom).child("profile"); // 사용자 프로필에 사진을 넣기 위해 'photo'의 데이터를 받아온다.
         message = new MyMessage();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -97,8 +97,6 @@ public class ChattingActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "작동", Toast.LENGTH_SHORT).show();
                     myProfileUrl = dataSnapshot.child(myNum).getValue(String.class);
                     Log.d("=======", myProfileUrl);
-
-
                 }
             }
 
@@ -109,6 +107,7 @@ public class ChattingActivity extends AppCompatActivity {
         });
     }
 
+    // ArrayList에 채팅 내용을 담아 RecyclerView에 뿌려준다.
     private void getMessageFromDatabase() {
         roomRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -137,7 +136,6 @@ public class ChattingActivity extends AppCompatActivity {
         message.messageTime = TimeConverter.timeConverterMinute(System.currentTimeMillis());
         message.messageDate = TimeConverter.timeConverterDate(System.currentTimeMillis());
         message.profileUrl = myProfileUrl;
-        Log.d("====", myProfileUrl);
 
         editTextPutMessage.setText("");
         String time = String.valueOf(System.currentTimeMillis());

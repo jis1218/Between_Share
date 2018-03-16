@@ -11,7 +11,9 @@
         android:theme="@style/NoActionBar">
         <activity
             android:name=".chatting.ChattingActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified"
+            >
+        </activity>
         <activity android:name=".signInAndUp.SignInActivity" />
         <activity android:name=".signInAndUp.SignUpActivity" />
         <activity android:name=".signInAndUp.AcceptActivity" />

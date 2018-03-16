@@ -64,23 +64,27 @@ public class SignUpActivity extends AppCompatActivity {
 //                            UserProfileChangeRequest.Builder profile = new UserProfileChangeRequest.Builder();
 //                            profile.setDisplayName(email);
 //                            fUser.updateProfile(profile.build());
+                            moveToNext();
+                            PreferenceUtil.setValue(SignUpActivity.this, "userEmail", email);
+                            PreferenceUtil.setValue(SignUpActivity.this, "password", password);
 
-                            fUser.sendEmailVerification()
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            DialogUtil.showDialog("이메일을 발송하였습니다.", SignUpActivity.this, true);
-                                            moveToNext();
-                                            PreferenceUtil.setValue(SignUpActivity.this, "userEmail", email);
-                                            PreferenceUtil.setValue(SignUpActivity.this, "password", password);
+//                            fUser.sendEmailVerification()
+//                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<Void> task) {
+                            //if (user.isEmailVerified()) { 이게 있어야 이메일 인증받은 후 사용 가능, 없으면 그냥 사용 가능
 
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    DialogUtil.showDialog("오류발생" + e.getMessage(), SignUpActivity.this, false);
-                                }
-                            });
+//                                            DialogUtil.showDialog("이메일을 발송하였습니다.", SignUpActivity.this, true);
+//                                            Toast.makeText(SignUpActivity.this, "확인", Toast.LENGTH_SHORT).show();
+//
+//
+//                                        }
+//                                    }).addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                    DialogUtil.showDialog("오류발생" + e.getMessage(), SignUpActivity.this, false);
+//                                }
+//                            });
                             tempKey = email.replace(".", "_");
                             String refreshedToken = FirebaseInstanceId.getInstance().getToken();
                             User user = new User(fUser.getUid(), email, refreshedToken);

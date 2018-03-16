@@ -39,6 +39,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyAdap
     @Override
     public int getItemViewType(int position) {
 
+        /**
+         * SharedPreference에 저장된 나의 정보와 채팅에 담겨있는 user_num이 같을 경우 MY_MESSAGE를 반환한다.
+         * 아닐 경우 YOUR_MESSAGE를 반환한다.
+         */
         if ((list.get(position).user_num).equals(PreferenceUtil.getStringValue(context,"myNum"))) {
             return MY_MESSAGE;
         } else {
@@ -49,6 +53,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyAdap
     @Override
     public MyAdapter onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
+        // ViewType에 따라 어떤 view를 뿌려줄지 정한다.
         if (viewType == MY_MESSAGE) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_chat_box, parent, false);
             return new MyAdapter(view);

@@ -63,8 +63,6 @@ public class AcceptActivity extends AppCompatActivity {
         myNumRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if ("yes".equals(snapshot.getValue(String.class))) {
                         Intent intent = new Intent(AcceptActivity.this, ProfileActivity.class);
@@ -74,16 +72,13 @@ public class AcceptActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                     Toast.makeText(AcceptActivity.this, snapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
-
                 }
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-
 
         });
 
