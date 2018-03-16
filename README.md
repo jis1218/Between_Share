@@ -82,6 +82,90 @@ public class SignUpActivity extends AppCompatActivity {
 - #### Firebase DB의 데이터 모습
 ![pic6](https://github.com/jis1218/Between_Share/blob/master/img/pic6.png)<br>
 
+- #### 내가 나의 번호와 상대 번호를 입력하고 연결하기를 누르게 되면  addListenerForSingleValueEvent 메서드를 통해 서버의 temp 노드 아래에 상대방의 번호가 있는지 확인한다. 없다면 나의 번호를 이용해 노드를 추가하고 위의 그림과 같이 friendNumber와 status 노드를 추가하고 내용을 저장한다. status 밑에 confirm의 값으로는 "none"이 입력된다. 그리고 나서 대기화면으로 넘어가게 된다. 상대방이 나와 자기 번호를 입력하고 연결하기를 누르게 되면 역시나 addListenerForSingleValueEvent에서 상대 번호가 있는지 확인한 후 있다면 
+status 아래 confirm의 값을 "yes"로 바꾼다. 대기화면에 있던 나의 앱은 addValueEventListener 메서드를 통해 "yes"로 바뀐 것을 감지하고 다음 Activity로 넘어가게 된다.
+```java
+public class PhoneConnectActivity extends AppCompatActivity {
+    /**
+     * 코드 생략
+    **/
+    tempRoomRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.hasChild(friendNumber)){
+                    Toast.makeText(PhoneConnectActivity.this, "가진 사용자 없음", Toast.LENGTH_LONG).show();
+                    dataSnapshot.child(myNumber).child("friendNumber").getRef().setValue(friendNumber);
+                    dataSnapshot.child(myNumber).child("status").child("confirm").getRef().setValue("none");
+                    String chatRoom = myNumber + friendNumber + "chat";
+                    String photoRoom = myNumber + friendNumber + "photo";
+
+                    userRef.child(tempkey).child("roomID").child("id").setValue(chatRoom);
+                    userRef.child(tempkey).child("photoID").child("id").setValue(photoRoom);
+                    PreferenceUtil.setValue(PhoneConnectActivity.this, "chatroom", chatRoom);
+                    PreferenceUtil.setValue(PhoneConnectActivity.this, "myNum", myNumber);
+                    PreferenceUtil.setValue(PhoneConnectActivity.this, "photoroom", photoRoom);
+
+                    moveToAcceptActivity(myNumber, friendNumber);
+
+                }else{
+                    Toast.makeText(PhoneConnectActivity.this, "가진 사용자 있음", Toast.LENGTH_LONG).show();
+                    dataSnapshot.child(friendNumber).child("status").child("confirm").getRef().setValue("yes");
+                    String chatRoom = friendNumber+ myNumber + "chat";
+                    String photoRoom = friendNumber + myNumber + "photo";
+                    userRef.child(tempkey).child("roomID").child("id").setValue(friendNumber+ myNumber + "chat");
+                    userRef.child(tempkey).child("photoID").child("id").setValue(photoRoom);
+                    PreferenceUtil.setValue(PhoneConnectActivity.this, "chatroom", chatRoom);
+                    PreferenceUtil.setValue(PhoneConnectActivity.this, "myNum", myNumber);
+                    PreferenceUtil.setValue(PhoneConnectActivity.this, "photoroom", photoRoom);
+                    moveToProfileActivity();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+```
+```java
+
+public class AcceptActivity extends AppCompatActivity {
+    public void goToProfileActivity() {
+        /**
+         * 코드 생략
+        **/
+        myNumRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if ("yes".equals(snapshot.getValue(String.class))) {
+                        Intent intent = new Intent(AcceptActivity.this, ProfileActivity.class);
+                        intent.putExtra("tempkey2", tempkey);
+                        Toast.makeText(AcceptActivity.this, "연결되었습니다", Toast.LENGTH_SHORT).show();
+                        countDown.cancel();
+                        startActivity(intent);
+                    }
+                    Toast.makeText(AcceptActivity.this, snapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+}
+```
+
+#### 1 대 1 채팅 구현
+![pic7](https://github.com/jis1218/Between_Share/blob/master/img/pic7.png)<br>
+
+
+
+
 
 
 

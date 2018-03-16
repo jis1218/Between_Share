@@ -59,7 +59,6 @@ public class AcceptActivity extends AppCompatActivity {
     }
 
     public void goToProfileActivity() {
-
         myNumRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -79,9 +78,7 @@ public class AcceptActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-
         });
-
     }
 
     public void downloadLink(View view) {
